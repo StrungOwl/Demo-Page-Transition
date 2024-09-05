@@ -29,13 +29,14 @@ function setup() {
 
   // Resize the door image to fit the canvas dimensions
   door.resize(width, height);
+  hallway.resize(width, height);
+  room.resize(width, height);
 
   // Set the initial size of the knob based on the canvas height
   cS = height * 0.06;
 
   // Set the initial position of the door, going to animate later
   rectX = width * 0.5;
-
 
   // Set the initial color of the knob to black (0)
   cColor = 0;
@@ -56,38 +57,30 @@ function draw() {
     image(door, width / 2, height / 2);
     // Draw the knob
     drawKnob(cX, cY);
-
   } else if (showHallway) {
-
     // If the knob has been clicked, draw the hallway image
     image(hallway, width / 2, height / 2);
 
     //draw interactive door
-     rectY = height * 0.63;
-     rectW = width * 0.2;
-     rectH = height * 0.25;
+    rectY = height * 0.63;
+    rectW = width * 0.2;
+    rectH = height * 0.25;
     rectMode(CENTER);
     rect(rectX, rectY, rectW, rectH);
 
-    animateDoor(); 
-
-
+    animateDoor();
   } else if (showRoom) {
-
     image(room, width / 2, height / 2);
-
   }
-  
 
   // Animate the knob size using a sine wave
   animateKnob();
 
-// Calculate the distance from the mouse to the knob
-  d = dist(mouseX, mouseY, cX, cY); 
+  // Calculate the distance from the mouse to the knob
+  d = dist(mouseX, mouseY, cX, cY);
 
   //Dist from mouse to hallway door
   d2 = dist(mouseX, mouseY, rectX, rectY);
-
 }
 
 // Function to draw the knob
@@ -102,11 +95,10 @@ function animateKnob() {
   angle += 0.1; // Increment the angle for the sine wave
 }
 
-function animateDoor(){
-    rectX = rectX + sin(angle) * 0.8; // Update the knob size
-    angle += 0.1; // Increment the angle for the sine wave
+function animateDoor() {
+  rectX = rectX + sin(angle) * 0.8; // Update the knob size
+  angle += 0.1; // Increment the angle for the sine wave
 }
-
 
 // Function to handle mouse press events
 function mousePressed() {
@@ -118,5 +110,4 @@ function mousePressed() {
     showHallway = false;
     showRoom = true;
   }
-
 }
